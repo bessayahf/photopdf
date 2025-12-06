@@ -30,6 +30,8 @@
             color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* Hero Section */
@@ -104,11 +106,16 @@
             margin-top: 20px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             animation: fadeInUp 0.8s ease-out 0.6s backwards;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .cta-button:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button:active {
+            transform: translateY(-2px);
         }
 
         .cta-button img {
@@ -131,6 +138,8 @@
             justify-content: center;
             gap: 20px;
             flex-wrap: wrap;
+            padding: 0 10px;
+            transition: transform 0.5s ease;
         }
 
         .screenshot {
@@ -139,6 +148,7 @@
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease;
             animation: fadeInUp 1s ease-out backwards;
+            flex-shrink: 0;
         }
 
         .screenshot:nth-child(1) { animation-delay: 0.2s; }
@@ -150,10 +160,86 @@
             transform: translateY(-10px) scale(1.05);
         }
 
+        /* Carousel styles for mobile */
+        .carousel-dots {
+            display: none;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(102, 126, 234, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: #667eea;
+            width: 30px;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .screenshots-preview {
+                overflow: hidden;
+                position: relative;
+            }
+
+            .screenshots-container {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                gap: 15px;
+                justify-content: flex-start;
+            }
+
+            .screenshots-container::-webkit-scrollbar {
+                display: none;
+            }
+
+            .screenshot {
+                scroll-snap-align: center;
+                width: 220px;
+            }
+
+            .screenshot:hover {
+                transform: none;
+            }
+
+            .carousel-dots {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .screenshot {
+                width: 200px;
+            }
+        }
+
         /* Features Section */
         .features {
             padding: 120px 20px 80px;
             background: var(--bg-light);
+        }
+
+        @media (max-width: 768px) {
+            .features {
+                padding: 80px 20px 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .features {
+                padding: 60px 15px 40px;
+            }
         }
 
         .features-header {
@@ -245,6 +331,18 @@
             background: white;
         }
 
+        @media (max-width: 768px) {
+            .use-cases {
+                padding: 60px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .use-cases {
+                padding: 50px 15px;
+            }
+        }
+
         .use-cases-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -292,6 +390,18 @@
             padding: 80px 20px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+        }
+
+        @media (max-width: 768px) {
+            .why-choose {
+                padding: 60px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .why-choose {
+                padding: 50px 15px;
+            }
         }
 
         .why-choose-content {
@@ -344,6 +454,18 @@
         .privacy-section {
             padding: 80px 20px;
             background: var(--bg-light);
+        }
+
+        @media (max-width: 768px) {
+            .privacy-section {
+                padding: 60px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .privacy-section {
+                padding: 50px 15px;
+            }
         }
 
         .privacy-content {
@@ -447,23 +569,55 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .hero {
+                padding: 60px 20px 100px;
+            }
+
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+                line-height: 1.2;
             }
 
             .hero .subtitle {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
 
-            .screenshot {
-                width: 220px;
+            .rating {
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px 30px;
+                text-align: center;
+            }
+
+            .rating img {
+                height: 80px !important;
+            }
+
+            .rating div {
+                text-align: center !important;
+            }
+
+            .rating p {
+                font-size: 1rem !important;
+            }
+
+            .screenshots-container {
+                gap: 15px;
+            }
+
+            .features-grid,
+            .use-cases-grid,
+            .benefits-grid,
+            .privacy-features {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
 
             .features-header h2,
             .use-cases h2,
             .why-choose h2,
             .privacy-header h2 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
 
             .final-cta h2 {
@@ -473,28 +627,113 @@
             .final-cta p {
                 font-size: 1.1rem;
             }
+
+            .feature-card {
+                padding: 30px 25px;
+            }
         }
 
         @media (max-width: 480px) {
             .hero {
-                padding: 60px 15px 100px;
+                padding: 50px 15px 80px;
             }
 
             .hero h1 {
-                font-size: 2rem;
+                font-size: 1.75rem;
+                line-height: 1.2;
             }
 
             .hero .subtitle {
                 font-size: 1rem;
+                margin-bottom: 25px;
             }
 
-            .screenshot {
-                width: 180px;
+            .rating {
+                padding: 15px 20px;
+                gap: 10px;
+            }
+
+            .rating img {
+                height: 70px !important;
+            }
+
+            .rating p {
+                font-size: 0.9rem !important;
             }
 
             .cta-button img,
             .final-cta .cta-button img {
                 height: 50px;
+            }
+
+            .features-header h2,
+            .use-cases h2,
+            .why-choose h2,
+            .privacy-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .features-header p,
+            .use-cases p,
+            .why-choose p {
+                font-size: 1rem;
+            }
+
+            .feature-card {
+                padding: 25px 20px;
+            }
+
+            .feature-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .final-cta {
+                padding: 60px 15px;
+            }
+
+            .final-cta h2 {
+                font-size: 1.75rem;
+            }
+
+            .final-cta p {
+                font-size: 1rem;
+            }
+
+            .use-cases-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .rating {
+                padding: 12px 15px;
+            }
+
+            .rating img {
+                height: 60px !important;
+            }
+
+            .rating p {
+                font-size: 0.85rem !important;
+            }
+
+            .cta-button img,
+            .final-cta .cta-button img {
+                height: 45px;
             }
         }
     </style>
@@ -531,6 +770,12 @@
             <img src="Photos/2.png" alt="Edit and Sign Documents" class="screenshot">
             <img src="Photos/3.png" alt="Manage Documents and Signatures" class="screenshot">
             <img src="Photos/4.png" alt="Privacy and Security" class="screenshot">
+        </div>
+        <div class="carousel-dots">
+            <div class="carousel-dot active" data-index="0"></div>
+            <div class="carousel-dot" data-index="1"></div>
+            <div class="carousel-dot" data-index="2"></div>
+            <div class="carousel-dot" data-index="3"></div>
         </div>
     </section>
 
@@ -713,6 +958,72 @@
     <footer>
         <p>&copy; 2025 Photo to PDF. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Screenshot carousel functionality for mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.screenshots-container');
+            const dots = document.querySelectorAll('.carousel-dot');
+            const screenshots = document.querySelectorAll('.screenshot');
+
+            if (!container || dots.length === 0) return;
+
+            // Function to update active dot based on scroll position
+            function updateActiveDot() {
+                const scrollLeft = container.scrollLeft;
+                const containerWidth = container.offsetWidth;
+                const screenshotWidth = screenshots[0].offsetWidth;
+                const gap = 15; // gap between screenshots
+                
+                const currentIndex = Math.round(scrollLeft / (screenshotWidth + gap));
+                
+                dots.forEach((dot, index) => {
+                    if (index === currentIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+
+            // Scroll event listener with throttling
+            let scrollTimeout;
+            container.addEventListener('scroll', function() {
+                if (scrollTimeout) {
+                    clearTimeout(scrollTimeout);
+                }
+                scrollTimeout = setTimeout(updateActiveDot, 100);
+            });
+
+            // Dot click functionality
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', function() {
+                    const screenshotWidth = screenshots[0].offsetWidth;
+                    const gap = 15;
+                    const scrollPosition = index * (screenshotWidth + gap);
+                    
+                    container.scrollTo({
+                        left: scrollPosition,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Touch swipe support (already handled by CSS scroll-snap)
+            // But we can add some visual feedback
+            let startX = 0;
+            let isDragging = false;
+
+            container.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].pageX;
+                isDragging = true;
+            });
+
+            container.addEventListener('touchend', function() {
+                isDragging = false;
+            });
+        });
+    </script>
 </body>
 </html>
 
